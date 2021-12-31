@@ -7,11 +7,10 @@
 
 ## Development
 
-```
-./ake install   # install to vscode
-```
+- Dev: `Run - Start Debugging; Edit a file - Reload window`
+- Install to VSCode: `./ake install; Reload Window`
 
-**Publish**
+## Publish
 
 ```
 edit version in package.json
