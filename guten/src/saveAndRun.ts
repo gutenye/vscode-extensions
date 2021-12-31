@@ -1,7 +1,7 @@
-import * as vscode from 'vscode'
+import { window } from 'vscode'
 
 export default function saveAndRun() {
-  const document = vscode.window.activeTextEditor?.document
+  const document = window.activeTextEditor?.document
   if (!document) {
     return
   }
@@ -13,12 +13,13 @@ export default function saveAndRun() {
     return
   }
 
-  let terminal = vscode.window.activeTerminal
+  let terminal = window.activeTerminal
   if (!terminal) {
-    terminal = vscode.window.createTerminal()
+    terminal = window.createTerminal()
   }
 
   document.save()
+  terminal.show(true)
   terminal.sendText(`${cmd} "${document.fileName}`, true)
-  terminal.show()
+  // terminal.sendText(`                ${cmd} "${document.fileName}`, true) // space for missing text
 }
