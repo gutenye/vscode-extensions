@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+main() {
+  case "$1" in
+    install ) install ;;
+    publish ) publish ;;
+  esac
+}
+
+install() {
+  rm *.vsix
+  yarn vsce package --no-dependencies
+  code --install-extension *.vsix
+}
+
+publish() {
+  yarn vsce publish --no-dependencies
+}
+
+main "$@"

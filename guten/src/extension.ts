@@ -1,17 +1,15 @@
 import * as vscode from 'vscode'
-import { spawn } from 'child_process'
+
+import makeExecutable from './makeExecutable'
+import saveAndRun from './saveAndRun'
 
 export function activate(context: vscode.ExtensionContext) {
-  const disposable = vscode.commands.registerCommand(
-    'gutenye.makeExecutable',
-    () => {
-      const path = vscode.window.activeTextEditor?.document.fileName
-      if (path) {
-        spawn('chmod', ['+x', path])
-      }
-    }
+  context.subscriptions.push(
+    vscode.commands.registerCommand('gutenye.makeExecutable', makeExecutable)
   )
-  context.subscriptions.push(disposable)
+  context.subscriptions.push(
+    vscode.commands.registerCommand('gutenye.saveAndRun', saveAndRun)
+  )
 }
 
 export function deactivate() {}
